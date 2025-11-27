@@ -1,164 +1,250 @@
----
-import Carousel from "./Carousel.astro";
-import TopBar from "./TopBar.astro";
-import Navbar from "./Navbar.astro";
----
-
 <header class="bg-white shadow-md sticky top-0 z-50">
   <!-- Sección de publicidad con carousel -->
-  <Carousel />
-  <!-- Topbar -->
-  <TopBar />
-
-  <!-- Navbar principal -->
-
-<Navbar />
-  <!-- Segundo navbar (opcional) -->
-  <section class="bg-green-700 py-2 px-4 hidden md:block">
-    <div class="container mx-auto flex justify-center space-x-8">
-      <a
-        href="https://www.fundacionhechoenbolivia.com/fundacionhb/"
-        class="text-white hover:text-blue-600">Noticias</a
-      >
-      <a
-        href="/pdf/tablacotizaciones.pdf"
-        class="text-white hover:text-blue-600">Cotizacion</a
-      >
-      <a href="/Articulos" class="text-white hover:text-blue-600">Articulos</a>
-      <a href="/pdf/lectura.pdf" class="text-white hover:text-blue-600"
-        >Lecturas Cortas</a
-      >
-      <a href="/precios" class="text-white hover:text-blue-600"
-        >Precios Internacionales</a
-      >
-      <a href="/pdf/cargassociales.pdf" class="text-white hover:text-blue-600"
-        >Cargas Sociales</a
-      >
+  <section class="publi flex justify-center items-center bg-gray-100 py-2">
+    <div class="carousel-container relative w-full h-[90px] md:h-[150px] overflow-hidden">
+      <div id="carousel" class="carousel-slides flex transition-transform duration-500 ease-in-out">
+        <!-- Las imágenes se cargarán dinámicamente con JavaScript -->
+      </div>
+      <!-- Indicadores del carousel -->
+      <div class="carousel-indicators absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="0"></button>
+        <button class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white bg-opacity-50 border border-white" data-index="1"></button>
+      </div>
     </div>
   </section>
 
-  <!-- Menú móvil (hidden por defecto) - ACTUALIZADO -->
- 
+  <!-- Topbar -->
+  <section class="bg-red-600 text-white py-1 px-4">
+    <div class="container mx-auto flex justify-end">
+      <a href="https://www.fundacionhechoenbolivia.com/fundacionhb/" class="text-sm md:text-lg font-medium hover:underline">Fundación Hecho en Bolivia</a>
+    </div>
+  </section>
+
+  <!-- Navbar principal -->
+  <nav class="bg-yellow-400 mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <a href="/" class="flex items-center">
+        <img src="/logo.png" alt="Logo" class="h-10 md:h-14" />
+      </a>
+    </div>
+
+    <!-- Menú de navegación (visible en desktop) -->
+    <div class="hidden md:flex space-x-6">
+      <a href="#" class="hover:text-blue-600 font-medium" id="publicidad-desktop">
+        Publicidad
+      </a>
+      <a href="/pdf/indicadores.pdf" class="hover:text-blue-600 font-medium">Indicadores</a>
+      <a href="/pdf/salariominimo.pdf" class="hover:text-blue-600 font-medium">Evolucion del SMN</a>
+      <a href="/pdf/ipc.pdf" class="hover:text-blue-600 font-medium">IPC Paises Vecinos</a>
+    </div>
+
+    <!-- Botón suscribirse -->
+    <div class="flex items-center space-x-4">
+      <button class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md font-medium hidden md:block" id="suscribirse-desktop">
+        Suscríbete
+      </button>
+      <!-- Botón menú móvil -->
+      <button id="mobile-menu-button" class="md:hidden text-gray-800 hover:text-gray-900 focus:outline-none">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Segundo navbar (opcional) -->
+  <section class="bg-green-700 py-2 px-4 hidden md:block">
+    <div class="container mx-auto flex justify-center space-x-8">
+      <a href="#" class="text-white hover:text-blue-600">Noticias</a>
+      <a href="/pdf/tablacotizaciones.pdf" class="text-white hover:text-blue-600">Cotizacion</a>
+      <a href="/Articulos" class="text-white hover:text-blue-600">Articulos</a>
+      <a href="/pdf/lectura.pdf" class="text-white hover:text-blue-600">Lecturas Cortas</a>
+      <a href="/precios" class="text-white hover:text-blue-600">Precios Internacionales</a>
+      <a href="/pdf/cargassociales.pdf" class="text-white hover:text-blue-600">Cargas Sociales</a>
+    </div>
+  </section>
+
+  <!-- Menú móvil (hidden por defecto) -->
+  <div id="mobile-menu" class="md:hidden hidden bg-white border-t shadow-lg">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <!-- Enlaces del primer navbar -->
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50" id="publicidad-mobile">
+        Publicidad
+      </a>
+      <a href="/pdf/indicadores.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Indicadores</a>
+      <a href="/pdf/salariominimo.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Evolucion del SMN</a>
+      <a href="/pdf/ipc.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">IPC Paises Vecinos</a>
+
+      <!-- Enlaces del segundo navbar -->
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Noticias</a>
+      <a href="/pdf/tablacotizaciones.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cotizacion</a>
+      <a href="/Articulos" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Articulos</a>
+      <a href="/pdf/lectura.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Lectura 2 Minutos</a>
+      <a href="/precios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Precios Internacionales</a>
+      <a href="/pdf/cargassociales.pdf" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Cargas Sociales</a>
+
+      <button class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50" id="suscribirse-mobile">Suscríbete</button>
+    </div>
+  </div>
+
+  <!-- Modales (mantener igual) -->
+  <!-- ... tus modales existentes ... -->
 </header>
 
 <script>
-  // Función para abrir el modal
-  function openContactModal() {
-    const modal = document.querySelector("contact-modal");
-    if (modal && modal.showModal) {
-      modal.showModal();
-    } else {
-      console.error("Modal no encontrado o no tiene método showDialog");
-      // Fallback: buscar por id si es necesario
-      const modalById = document.getElementById("contact-modal");
-      if (modalById) {
-        modalById.classList.remove("hidden");
-      }
+  // SOLUCIÓN SIMPLIFICADA - Solo un event listener para el menú móvil
+  document.addEventListener('DOMContentLoaded', function() {
+    // Referencias a elementos
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    // 1. Toggle del menú móvil - SOLO UNA VEZ
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+        console.log('Menú móvil toggled'); // Para debugging
+      });
     }
-  }
 
-  // Toggle mobile menu (sin duplicación)
-  document
-    .getElementById("mobile-menu-button")
-    .addEventListener("click", function () {
-      const menu = document.getElementById("mobile-menu");
-      menu.classList.toggle("hidden");
+    // 2. Cerrar menú al hacer clic en enlaces
+    document.querySelectorAll('#mobile-menu a, #mobile-menu button').forEach(element => {
+      element.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+      });
     });
 
-  // Cerrar menú móvil al hacer clic en un enlace
-  document.querySelectorAll("#mobile-menu a").forEach((link) => {
-    link.addEventListener("click", function () {
-      document.getElementById("mobile-menu").classList.add("hidden");
-    });
-  });
+    // 3. Funcionalidad del carousel (mantener igual)
+    const carousel = document.getElementById('carousel');
+    const indicators = document.querySelectorAll('.carousel-indicator');
 
-  // Carousel functionality
-  document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.getElementById("carousel");
-    const indicators = document.querySelectorAll(".carousel-indicator");
+    if (carousel) {
+      const images = [
+        "/banner1.jpg",
+        "/banner2.png",
+      ];
 
-    // RUTAS ACTUALIZADAS - Ajusta las extensiones según tus imágenes
-    const images = [
-      "/banner1.jpg", // o .png, .webp, etc.
-      "/banner2.png", // o .png, .webp, etc.
-    ];
+      // Crear elementos de imagen
+      images.forEach((imgSrc, index) => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.alt = `Banner ${index + 1}`;
+        img.className = "min-w-full h-[90px] md:h-[150px] object-contain md:object-cover";
+        carousel.appendChild(img);
+      });
 
-    // Crear elementos de imagen
-    images.forEach((imgSrc, index) => {
-      const img = document.createElement("img");
-      img.src = imgSrc;
-      img.alt = `Banner ${index + 1}`;
-      img.className =
-        "min-w-full h-[90px] md:h-[150px] object-contain md:object-cover";
-      carousel.appendChild(img);
-    });
+      // Resto del código del carousel...
+      const firstClone = carousel.children[0].cloneNode(true);
+      const lastClone = carousel.children[carousel.children.length - 1].cloneNode(true);
 
-    // Resto del código del carousel...
-    const firstClone = carousel.children[0].cloneNode(true);
-    const lastClone =
-      carousel.children[carousel.children.length - 1].cloneNode(true);
+      carousel.appendChild(firstClone);
+      carousel.insertBefore(lastClone, carousel.firstChild);
 
-    carousel.appendChild(firstClone);
-    carousel.insertBefore(lastClone, carousel.firstChild);
+      let currentIndex = 1;
+      const totalSlides = images.length;
+      const slideWidth = 100;
 
-    let currentIndex = 1;
-    const totalSlides = images.length;
-    const slideWidth = 100;
-
-    carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
-
-    function updateCarousel() {
-      carousel.style.transition = "transform 0.5s ease-in-out";
       carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
 
-      indicators.forEach((indicator, index) => {
-        if (index === (currentIndex - 1 + totalSlides) % totalSlides) {
-          indicator.classList.remove("bg-opacity-50");
-          indicator.classList.add("bg-white");
-        } else {
-          indicator.classList.remove("bg-white");
-          indicator.classList.add("bg-opacity-50");
+      function updateCarousel() {
+        carousel.style.transition = "transform 0.5s ease-in-out";
+        carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+        indicators.forEach((indicator, index) => {
+          if (index === (currentIndex - 1 + totalSlides) % totalSlides) {
+            indicator.classList.remove("bg-opacity-50");
+            indicator.classList.add("bg-white");
+          } else {
+            indicator.classList.remove("bg-white");
+            indicator.classList.add("bg-opacity-50");
+          }
+        });
+      }
+
+      function goToSlide(index) {
+        currentIndex = index + 1;
+        updateCarousel();
+      }
+
+      function nextSlide() {
+        currentIndex++;
+        updateCarousel();
+
+        if (currentIndex === totalSlides + 1) {
+          setTimeout(() => {
+            carousel.style.transition = "none";
+            currentIndex = 1;
+            carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+          }, 500);
         }
-      });
-    }
-
-    function goToSlide(index) {
-      currentIndex = index + 1;
-      updateCarousel();
-    }
-
-    function nextSlide() {
-      currentIndex++;
-      updateCarousel();
-
-      if (currentIndex === totalSlides + 1) {
-        setTimeout(() => {
-          carousel.style.transition = "none";
-          currentIndex = 1;
-          carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
-        }, 500);
       }
-    }
 
-    function prevSlide() {
-      currentIndex--;
-      updateCarousel();
+      function prevSlide() {
+        currentIndex--;
+        updateCarousel();
 
-      if (currentIndex === 0) {
-        setTimeout(() => {
-          carousel.style.transition = "none";
-          currentIndex = totalSlides;
-          carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
-        }, 500);
+        if (currentIndex === 0) {
+          setTimeout(() => {
+            carousel.style.transition = "none";
+            currentIndex = totalSlides;
+            carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+          }, 500);
+        }
       }
+
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          goToSlide(index);
+        });
+      });
+
+      setInterval(nextSlide, 5000);
     }
 
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener("click", () => {
-        goToSlide(index);
-      });
+    // 4. Funcionalidad de modales (mantener igual)
+    const subscribeModal = document.getElementById('subscribe-modal');
+    const contactModal = document.getElementById('contact-modal');
+
+    // Abrir modal de suscripción
+    document.getElementById('suscribirse-desktop')?.addEventListener('click', () => {
+      subscribeModal?.classList.remove('hidden');
+    });
+    
+    document.getElementById('suscribirse-mobile')?.addEventListener('click', () => {
+      subscribeModal?.classList.remove('hidden');
     });
 
-    setInterval(nextSlide, 5000);
+    // Abrir modal de contacto
+    document.getElementById('publicidad-desktop')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactModal?.classList.remove('hidden');
+    });
+    
+    document.getElementById('publicidad-mobile')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactModal?.classList.remove('hidden');
+    });
+
+    // Cerrar modales
+    document.getElementById('close-subscribe-modal')?.addEventListener('click', () => {
+      subscribeModal?.classList.add('hidden');
+    });
+
+    document.getElementById('close-contact-modal')?.addEventListener('click', () => {
+      contactModal?.classList.add('hidden');
+    });
+
+    // Cerrar modales al hacer clic fuera
+    subscribeModal?.addEventListener('click', (e) => {
+      if (e.target === subscribeModal) {
+        subscribeModal.classList.add('hidden');
+      }
+    });
+
+    contactModal?.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        contactModal.classList.add('hidden');
+      }
+    });
   });
 </script>
