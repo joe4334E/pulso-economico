@@ -1,0 +1,20 @@
+---
+import CardArticles from './CardArticles.astro';
+---
+
+<section class="container mx-auto px-4 py-12">
+  <h2 class="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white">Artículos Destacados</h2>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 place-items-center gap-8">
+    <CardArticles
+      image="/articulos/lectura0.png"
+      title="Seguridad Jurídica"
+      link="/pdf/seguridadjuridica.pdf"
+    />
+    <CardArticles
+      image="/articulos/lectura1.png"
+      title="La trampa del Gasto Público"
+      link="/pdf/trampagasto.pdf"
+    />
+  </div>
+</section>

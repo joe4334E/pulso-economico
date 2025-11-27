@@ -1,0 +1,144 @@
+<!-- Botón para abrir el modal -->
+<button 
+    type="button" 
+    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+    onclick="document.getElementById('publicidadModal').classList.remove('hidden')"
+>
+    Solicitar Publicidad
+</button>
+
+<!-- Modal backdrop (fondo oscuro) -->
+<div 
+    id="publicidadModal" 
+    class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+>
+    <!-- Modal container -->
+    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-white">
+        <!-- Modal header -->
+        <div class="flex justify-between items-center pb-3 border-b">
+            <h3 class="text-xl font-semibold text-gray-800">Solicitud de Publicidad</h3>
+            <button 
+                onclick="document.getElementById('publicidadModal').classList.add('hidden')"
+                class="text-gray-500 hover:text-gray-700"
+            >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Modal body (formulario) -->
+        <div class="mt-4">
+            <form id="formPublicidad">
+                <div class="mb-4">
+                    <label for="nombreEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Nombre de la Empresa</label>
+                    <input 
+                        type="text" 
+                        id="nombreEmpresa" 
+                        required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+
+                <div class="mb-4">
+                    <label for="correoEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                    <input 
+                        type="email" 
+                        id="correoEmpresa" 
+                        required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+
+                <div class="mb-4">
+                    <label for="telefonoEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                    <input 
+                        type="tel" 
+                        id="telefonoEmpresa" 
+                        required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+
+                <div class="mb-4">
+                    <label for="direccionEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                    <input 
+                        type="text" 
+                        id="direccionEmpresa" 
+                        required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+
+                <div class="mb-4">
+                    <label for="nombreContacto" class="block text-sm font-medium text-gray-700 mb-1">Nombre del Contacto</label>
+                    <input 
+                        type="text" 
+                        id="nombreContacto" 
+                        required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="flex justify-end pt-4 border-t mt-4">
+            <button 
+                onclick="document.getElementById('publicidadModal').classList.add('hidden')"
+                class="px-4 py-2 mr-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition-colors"
+            >
+                Cancelar
+            </button>
+            <button 
+                id="enviarSolicitud"
+                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            >
+                Enviar Solicitud
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Script para manejar el envío del formulario -->
+<script>
+document.getElementById('enviarSolicitud').addEventListener('click', function() {
+    const form = document.getElementById('formPublicidad');
+    
+    if (form.checkValidity()) {
+        // Reemplaza con tu correo real
+        const correoDestino = 'tu-correo@ejemplo.com';
+        
+        // Obtener datos del formulario
+        const datos = {
+            empresa: document.getElementById('nombreEmpresa').value,
+            contacto: document.getElementById('nombreContacto').value,
+            correo: document.getElementById('correoEmpresa').value,
+            telefono: document.getElementById('telefonoEmpresa').value,
+            direccion: document.getElementById('direccionEmpresa').value
+        };
+        
+        // Crear enlace mailto
+        const asunto = `Solicitud de Publicidad - ${datos.empresa}`;
+        const cuerpo = `
+Nueva solicitud de publicidad:
+
+Empresa: ${datos.empresa}
+Contacto: ${datos.contacto}
+Correo: ${datos.correo}
+Teléfono: ${datos.telefono}
+Dirección: ${datos.direccion}
+
+Por favor contactar a la empresa para más detalles.
+        `;
+        
+        window.location.href = `mailto:${correoDestino}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+        
+        // Cerrar modal
+        document.getElementById('publicidadModal').classList.add('hidden');
+    } else {
+        // Mostrar validaciones
+        form.reportValidity();
+    }
+});
+</script>

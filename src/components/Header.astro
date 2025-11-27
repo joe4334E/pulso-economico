@@ -1,0 +1,164 @@
+---
+import Carousel from "./Carousel.astro";
+import TopBar from "./TopBar.astro";
+import Navbar from "./Navbar.astro";
+---
+
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <!-- Sección de publicidad con carousel -->
+  <Carousel />
+  <!-- Topbar -->
+  <TopBar />
+
+  <!-- Navbar principal -->
+
+<Navbar />
+  <!-- Segundo navbar (opcional) -->
+  <section class="bg-green-700 py-2 px-4 hidden md:block">
+    <div class="container mx-auto flex justify-center space-x-8">
+      <a
+        href="https://www.fundacionhechoenbolivia.com/fundacionhb/"
+        class="text-white hover:text-blue-600">Noticias</a
+      >
+      <a
+        href="/pdf/tablacotizaciones.pdf"
+        class="text-white hover:text-blue-600">Cotizacion</a
+      >
+      <a href="/Articulos" class="text-white hover:text-blue-600">Articulos</a>
+      <a href="/pdf/lectura.pdf" class="text-white hover:text-blue-600"
+        >Lecturas Cortas</a
+      >
+      <a href="/precios" class="text-white hover:text-blue-600"
+        >Precios Internacionales</a
+      >
+      <a href="/pdf/cargassociales.pdf" class="text-white hover:text-blue-600"
+        >Cargas Sociales</a
+      >
+    </div>
+  </section>
+
+  <!-- Menú móvil (hidden por defecto) - ACTUALIZADO -->
+ 
+</header>
+
+<script>
+  // Función para abrir el modal
+  function openContactModal() {
+    const modal = document.querySelector("contact-modal");
+    if (modal && modal.showModal) {
+      modal.showModal();
+    } else {
+      console.error("Modal no encontrado o no tiene método showDialog");
+      // Fallback: buscar por id si es necesario
+      const modalById = document.getElementById("contact-modal");
+      if (modalById) {
+        modalById.classList.remove("hidden");
+      }
+    }
+  }
+
+  // Toggle mobile menu (sin duplicación)
+  document
+    .getElementById("mobile-menu-button")
+    .addEventListener("click", function () {
+      const menu = document.getElementById("mobile-menu");
+      menu.classList.toggle("hidden");
+    });
+
+  // Cerrar menú móvil al hacer clic en un enlace
+  document.querySelectorAll("#mobile-menu a").forEach((link) => {
+    link.addEventListener("click", function () {
+      document.getElementById("mobile-menu").classList.add("hidden");
+    });
+  });
+
+  // Carousel functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById("carousel");
+    const indicators = document.querySelectorAll(".carousel-indicator");
+
+    // RUTAS ACTUALIZADAS - Ajusta las extensiones según tus imágenes
+    const images = [
+      "/banner1.jpg", // o .png, .webp, etc.
+      "/banner2.png", // o .png, .webp, etc.
+    ];
+
+    // Crear elementos de imagen
+    images.forEach((imgSrc, index) => {
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.alt = `Banner ${index + 1}`;
+      img.className =
+        "min-w-full h-[90px] md:h-[150px] object-contain md:object-cover";
+      carousel.appendChild(img);
+    });
+
+    // Resto del código del carousel...
+    const firstClone = carousel.children[0].cloneNode(true);
+    const lastClone =
+      carousel.children[carousel.children.length - 1].cloneNode(true);
+
+    carousel.appendChild(firstClone);
+    carousel.insertBefore(lastClone, carousel.firstChild);
+
+    let currentIndex = 1;
+    const totalSlides = images.length;
+    const slideWidth = 100;
+
+    carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+    function updateCarousel() {
+      carousel.style.transition = "transform 0.5s ease-in-out";
+      carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+
+      indicators.forEach((indicator, index) => {
+        if (index === (currentIndex - 1 + totalSlides) % totalSlides) {
+          indicator.classList.remove("bg-opacity-50");
+          indicator.classList.add("bg-white");
+        } else {
+          indicator.classList.remove("bg-white");
+          indicator.classList.add("bg-opacity-50");
+        }
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = index + 1;
+      updateCarousel();
+    }
+
+    function nextSlide() {
+      currentIndex++;
+      updateCarousel();
+
+      if (currentIndex === totalSlides + 1) {
+        setTimeout(() => {
+          carousel.style.transition = "none";
+          currentIndex = 1;
+          carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+        }, 500);
+      }
+    }
+
+    function prevSlide() {
+      currentIndex--;
+      updateCarousel();
+
+      if (currentIndex === 0) {
+        setTimeout(() => {
+          carousel.style.transition = "none";
+          currentIndex = totalSlides;
+          carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+        }, 500);
+      }
+    }
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener("click", () => {
+        goToSlide(index);
+      });
+    });
+
+    setInterval(nextSlide, 5000);
+  });
+</script>

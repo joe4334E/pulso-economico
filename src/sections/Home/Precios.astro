@@ -1,0 +1,20 @@
+---
+import CardArticles from './CardArticles.astro';
+---
+
+<section class="container mx-auto px-4 py-12">
+  <h2 class="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white">Artículos Destacados</h2>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 place-items-center gap-8">
+    <CardArticles
+      image="https://www.foronuclear.org/wp-content/uploads/2010/06/petroleo-854x465.jpg"
+      title="Tabla de precios del Petroleo - 2025 "
+      link="/pdf/tablapetroleo2025.pdf"
+    />
+    <CardArticles
+      image="https://www.urgente.bo/sites/default/files/plata_2.jpg"
+      title="Tabla de precios de Minerales-2025"
+      link="/pdf/tablaminerales2025.pdf"
+    />
+  </div>
+</section>

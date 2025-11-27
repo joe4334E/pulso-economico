@@ -1,0 +1,88 @@
+---
+const patrocinadores = [
+  {  url: "https://coboce.com/", img: "/cimco.jpg" },
+  {url: "https://www.facebook.com/copelmesa/?locale=es_LA", img: "/copelme.jpeg" },
+  {url: "https://coboce.com/", img: "/coboce.jpeg" },
+  {url: "https://www.ypfb.gob.bo/es/", img: "/YPFB.jpeg" },
+  {url: "https://www.facebook.com/p/FACER-SRL-100063484871810/", img: "/facer.jpeg" },
+  {url: "https://fepc.bo/", img: "/unilever.png" },
+  { url: "https://cadexco.bo/", img: "/cadexco.jpeg" },
+  { url: "https://www.infocalcbba.edu.bo/", img: "/infocal.jpeg" },
+  { url: "https://fepc.bo/", img: "/epc.jpeg" },
+  { url: "https://fepc.bo/", img: "/proalbo.png" },
+  { url: "https://fepc.bo/", img: "/sagitario.png" },
+  { url: "https://fepc.bo/", img: "/cadeco.jpg" },
+  { url: "https://fepc.bo/", img: "/caminoPlaza.png" },
+  { url: "https://camaramineriacbba.com/", img: "/cdm.jpeg" },
+  { url: "https://xn--parqueindustrialsantivaez-voc.com/", img: "/santi.jpeg" }
+];
+---
+
+<aside class="p-4 rounded-sm bg-white">
+
+  <!-- Sección SICOES -->
+  <section class="mb-6 md:mb-8 flex flex-col gap-4 items-center">
+    <a href="https://www.sicoes.gob.bo" target="_blank" class="hover:opacity-90 transition-opacity duration-300">
+      <img src="https://www.fundacionhechoenbolivia.com/fundacionhb/wp-content/uploads/2021/07/logosicoes.png" 
+           alt="Logo SICOES" class="h-12 md:h-16 object-contain mx-auto">
+    </a>
+    <a href="https://www.sicoes.gob.bo" target="_blank" class="hover:opacity-90 transition-opacity duration-300">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Banco_de_Desarrollo_Productivo_S.A.M.svg" 
+           alt="Logo PDB" class="h-12 md:h-16 object-contain mx-auto">
+    </a>
+      <!-- Botón centrado -->
+  <a href="/hero-sidebar.jpeg" target="_blank"
+     class="mt-4 px-6 py-2 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700 transition-colors duration-300">
+    Nuevo
+  </a>
+  </section>
+
+  <!-- Sección PATROCINIOS -->
+  <section class="mb-6 md:mb-8">
+    <h3 class="text-md md:text-lg font-semibold text-black mb-4 pb-2 border-b border-gray-200 text-center">
+      PATROCINIOS
+    </h3>
+
+    <!-- Slider móvil -->
+    <div class="md:hidden relative overflow-hidden py-4">
+      <div class="animate-infinite-scroll flex w-max space-x-6">
+        {patrocinadores.map(p => (
+          <a href={p.url} target="_blank" class="flex flex-col items-center justify-center w-20">
+            <div class="rounded-full h-16 w-16 border-2 border-gray-200 shadow-sm overflow-hidden flex items-center justify-center bg-white p-2 hover:scale-105 transition-transform duration-300">
+              <img src={p.img} alt={p.nombre} class="sponsor-img object-contain" />
+            </div>
+            <span class="text-xs mt-1 text-gray-600">{p.nombre}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Grid desktop -->
+    <div class="hidden md:grid grid-cols-2 gap-4 place-items-center">
+      {patrocinadores.map(p => (
+        <a href={p.url} target="_blank" class="flex flex-col items-center justify-center w-full p-3 group hover:bg-gray-50 rounded-lg transition-colors duration-300">
+          <div class="rounded-full h-32 w-32 border-2 border-gray-200 shadow-sm overflow-hidden flex items-center justify-center bg-white p-2 group-hover:scale-105 transition-transform duration-300">
+            <img class='object-cover' src={p.img} alt={p.nombre} class="sponsor-img object-contain" />
+          </div>
+          <span class="text-sm mt-2 text-gray-700 font-medium group-hover:text-blue-600 transition-colors">{p.nombre}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</aside>
+
+<style>
+  @keyframes infinite-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-infinite-scroll {
+    display: flex;
+    width: max-content;
+    animation: infinite-scroll 30s linear infinite;
+  }
+  .animate-infinite-scroll:hover { animation-play-state: paused; }
+  .sponsor-img { width: 100%; height: 100%; object-fit: contain; }
+  @media (max-width: 767px) { .animate-infinite-scroll { animation-duration: 40s; } }
+</style>
+  

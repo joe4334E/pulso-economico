@@ -1,0 +1,50 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="google-adsense-account" content="ca-pub-9817607961607854">
+  <title>Pulso Económico</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9817607961607854" crossorigin="anonymous"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+  <!-- Header -->
+  <Header />
+
+  <!-- Contenido principal con sidebar -->
+  <div class="flex-1 flex flex-col md:flex-row">
+    <!-- Main content -->
+    <main class="order-2 md:order-1 md:w-7/12 lg:w-8/12 p-4 bg-white">
+      <!-- Anuncio encabezado del contenido -->
+<!-- <div class="mb-6 text-center"> -->
+<!-- <ins class="adsbygoogle" -->
+<!-- style="display:block" -->
+<!-- data-ad-client="ca-pub-9817607961607854" -->
+<!-- data-ad-slot="TU_SLOT_AQUI" -->
+<!-- data-ad-format="auto" -->
+<!-- data-full-width-responsive="true"></ins> -->
+<!-- <script is:inline> -->
+<!-- (adsbygoogle = window.adsbygoogle || []).push({}); -->
+<!-- </script> -->
+<!-- </div> -->
+      
+      <slot />
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="order-1 md:order-2 md:w-5/12 lg:w-4/12 p-4 bg-gray-200">
+      <Sidebar />
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <Footer />
+</body>
+</html>
